@@ -15,31 +15,41 @@ class RoversController < ApplicationController
     @rover.x_position = (0..$width-1).to_a.shuffle[0]
     @rover.direction = ['N','W','S','E'].shuffle[0]
     @rover.step = 0
-#    @rover.instruction = "MMRL"
-    @rover.save
-    $coordinates[@rover.y_position][@rover.x_position] = 1
-    render 'index'
+    if @rover.save
+      $coordinates[@rover.y_position][@rover.x_position] = 1
+      render 'index'
+    else
+      flash[:error] = "Instruction should not be blank and must contain 
+      only M, R and L commands!"
+      redirect_to root_path
+    end
   end
 
   def update
-    @rover = Rover.last
-    instruction = @rover.instruction.split('')
+    unless Rover.first.nil?
+      @rover = Rover.last
+      instruction = @rover.instruction.split('')
       case instruction[@rover.step]
       when "L"
-	self.left
+        self.left
       when "R"
-	self.right
+        self.right
       when "M"
-	self.move
+        self.move
       end
-    @rover.step += 1
-    @rover.save
-    render 'index'
+      @rover.step += 1
+      @rover.save
+      render 'index'
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
-    @rover = Rover.last
-    @rover.destroy
+    unless Rover.first.nil?
+      @rover = Rover.last
+      @rover.destroy
+    end
     redirect_to root_path
   end
 
@@ -48,13 +58,13 @@ class RoversController < ApplicationController
     @title = 'left'
       case @rover.direction
       when "N"
-	@rover.direction = "W"
+        @rover.direction = "W"
       when "W"
-	@rover.direction = "S"
+        @rover.direction = "S"
       when "S"
-	@rover.direction = "E"
+        @rover.direction = "E"
       when "E"
-	@rover.direction = "N"
+        @rover.direction = "N"
       end
   end
 
@@ -62,13 +72,13 @@ class RoversController < ApplicationController
     @title = 'right'
       case @rover.direction
       when "N"
-	@rover.direction = "E"
+        @rover.direction = "E"
       when "E"
-	@rover.direction = "S"
+        @rover.direction = "S"
       when "S"
-	@rover.direction = "W"
+        @rover.direction = "W"
       when "W"
-	@rover.direction = "N"
+        @rover.direction = "N"
       end
   end
 
@@ -77,21 +87,21 @@ class RoversController < ApplicationController
     $coordinates[@rover.y_position][@rover.x_position] = 0
       case @rover.direction
       when "N"
-	if @rover.y_position < $height-1
+        if @rover.y_position < $height-1
           @rover.y_position += 1
-	end
+        end
       when "W"
-	if @rover.x_position > 0
+        if @rover.x_position > 0
           @rover.x_position -= 1
-	end
+        end
       when "S"
-	if @rover.y_position > 0
+        if @rover.y_position > 0
           @rover.y_position -= 1
-	end
+        end
       when "E"
-	if @rover.x_position < $width-1
+        if @rover.x_position < $width-1
           @rover.x_position += 1
-	end
+        end
       end
     $coordinates[@rover.y_position][@rover.x_position] = 1
   end
