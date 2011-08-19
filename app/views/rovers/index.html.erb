@@ -1,56 +1,23 @@
 <table>
 <tr>
   <td class="sidebar_top">
-    <% unless @rover.step.nil? %>
-      <p class="sidebar_title">Information about rover</p>	
-      instruction: <%= @rover.instruction %><br>
-      done: <% if @rover.step != 0 %>
-              <%= @rover.instruction.split('').[]0..@rover.step-1 %>
-              <% else %> -
-            <% end %><br>
-      step: <%= @rover.step %><br>
-      position:  (<%= @rover.x_position %>,<%= @rover.y_position %>)<br>
-      direction: <%= @rover.direction %><br>
-      last action: <%= @title %>
+    <% if @rover.step.nil? %>
+      <%= render 'sidebar_for_no_started' %>
+    <% else %>
+      <%= render 'sidebar_for_started' %>
     <% end %>
-  </td>
-</tr>
-<tr>
-  <td>
   </td>
 </tr>
 <tr>
   <td class="sidebar_bottom">
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, :class => "flash #{key}") %>
-    <% end %>
     <% if @rover.step.nil? %>
-      <%= form_for(:rover, :url => start_path) do |f| %>
-        <div class="field">
-          <%= f.label :instruction %><br />
-          <%= f.text_field :instruction %>
-        </div>
-        <div class="actions">
-          <%= f.submit "Start" %>
-        </div>
-      <% end %>
-      <p><%= link_to "Start", start_path %></p>
+      <%= render 'start_button' %>
     <% else %>
-    <% if @rover.step < @rover.instruction.length %>
-      <%= form_for(:rover, :url => go_path) do |f| %>
-        <div class="actions">
-          <%= f.submit "Go" %>
-        </div>
+      <% if @rover.step < @rover.instruction.length %>
+        <%= render 'go_button' %>
+      <% else %>
+        <%= render 'finish_button' %>
       <% end %>
-      <p><%= link_to "Go", go_path %></p>
-    <% else %>
-      <%= form_for(:rover, :url => finish_path) do |f| %>
-        <div class="actions">
-          <%= f.submit "Finish" %>
-        </div>
-      <% end %>
-      <p><%= link_to "Finish", finish_path %></p>
-    <% end %>
     <% end %>
   </td>
 </tr>

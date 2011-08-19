@@ -1,6 +1,5 @@
 class RoversController < ApplicationController
 
-
   def index
     $height = 5
     $width = 7
@@ -52,7 +51,6 @@ class RoversController < ApplicationController
     end
     redirect_to root_path
   end
-
 
   def left
     @title = 'left'

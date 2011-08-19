@@ -1,0 +1,10 @@
+<table>
+  <% for i in  $coordinates.reverse %>
+    <tr>    
+      <% for j in  i %>
+        <td><%= coordinate_image(j) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+

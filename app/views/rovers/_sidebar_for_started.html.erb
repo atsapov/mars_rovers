@@ -1,0 +1,11 @@
+<p class="sidebar_title">Information about rover</p>	
+instruction: <%= @rover.instruction %><br>
+done: <% if @rover.step != 0 %>
+        <%= @rover.instruction.split('').[]0..@rover.step-1 %>
+      <% else %> -
+      <% end %><br>
+step: <%= @rover.step %><br>
+position:  (<%= @rover.x_position %>,<%= @rover.y_position %>)<br>
+direction: <%= @rover.direction %><br>
+last action: <%= @title %>
+

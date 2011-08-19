@@ -6,14 +6,19 @@
   width: auto;
 }
 
-body {
-  background: #9ff;
+body { 
+  background: url(images/back.jpg) ; 
+  background-size: cover; 
 }
 
 td.main {
-  width: 100%;
+  position: absolute;
+  top: 0px;
+  right: 300px;
+  left: 10%;
+  min-width: 300px;
   padding: 1em;
-  border: 1px solid #ff0;
+  padding-top: 20px;
 }
 
 td.sidebar {
@@ -44,7 +49,41 @@ p.sidebar_title {
 }
 
 td.sidebar_bottom {
-  padding: 20px;
-  border: 1px solid #0f0;
+  padding: 0px;
+  padding-top: 20px;
 }
 
+label {
+  font-weight:bold;
+  color:#0e0;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+input[type=text] {
+  background-color:#000;
+  border:1px solid #aaa;
+  color:#0e0;
+  font-family: monospace;
+}
+
+td.nothing {
+  background-color: transparent;
+  text-align: center;
+  height: 40px;
+  font-size: 12px;
+  color: #0e0;
+  padding: 20px;
+}
+
+td.rover {
+  font-size: 14px;
+  color: #ee0;
+}
+
+img.plato {
+  position: relative;
+  height: 20%;
+  width: 20%;
+  padding: 20%;
+}
