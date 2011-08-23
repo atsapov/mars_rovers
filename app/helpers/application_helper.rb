@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def file_for_rover
-    case @rover.direction
+    case current_rover.direction
     when "N"
       "rover_N.png"
     when "W"

@@ -17,7 +17,9 @@
     <table>
       <tr>
         <td class="main">
-          <%= render 'layouts/plato' %>
+          <% unless current_rover.nil? %>
+            <%= render 'layouts/plato' %>
+          <% end %>
         </td>
         <td class="sidebar">
           <%= yield %>

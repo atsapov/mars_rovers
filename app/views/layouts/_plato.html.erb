@@ -1,5 +1,5 @@
 <table>
-  <% for i in  $coordinates.reverse %>
+  <% for i in  current_plato.reverse %>
     <tr>    
       <% for j in  i %>
         <td><%= coordinate_image(j) %></td>
@@ -7,4 +7,4 @@
     </tr>
   <% end %>
 </table>
-
+<%= current_plato %>

@@ -1,8 +1,9 @@
 MarsRovers::Application.routes.draw do
 
   resources :rovers, :only => [:create, :update, :destroy]
+  resources :sessions, :only => [:create, :destroy]
 
-  root :to => "rovers#index"
+  root :to => 'rovers#index'
   match '/start',   :to => 'rovers#create'
   match '/go',      :to => 'rovers#update'
   match '/finish',  :to => 'rovers#destroy'

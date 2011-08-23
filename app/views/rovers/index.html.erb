@@ -1,7 +1,7 @@
 <table>
 <tr>
   <td class="sidebar_top">
-    <% if @rover.step.nil? %>
+    <% if current_rover.nil? %>
       <%= render 'sidebar_for_no_started' %>
     <% else %>
       <%= render 'sidebar_for_started' %>
@@ -10,10 +10,10 @@
 </tr>
 <tr>
   <td class="sidebar_bottom">
-    <% if @rover.step.nil? %>
+    <% if current_rover.nil? %>
       <%= render 'start_button' %>
     <% else %>
-      <% if @rover.step < @rover.instruction.length %>
+      <% if current_rover.step < current_rover.instruction.length %>
         <%= render 'go_button' %>
       <% else %>
         <%= render 'finish_button' %>
