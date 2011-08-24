@@ -1,0 +1,22 @@
+<td class="main">
+  <%= render 'plato' %>
+</td>
+<td class="sidebar">
+  <table>
+    <tr>
+      <td class="sidebar_top">
+        <%= render 'sidebar_for_started' %>
+      </td>
+    </tr>
+    <tr>
+      <td class="sidebar_bottom">
+        <% if current_rover.step < current_rover.instruction.length %>
+          <%= render 'go_button' %>
+        <% else %>
+          <%= render 'finish_button' %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</td>
+

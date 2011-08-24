@@ -16,14 +16,7 @@
   <div class="container">
     <table>
       <tr>
-        <td class="main">
-          <% unless current_rover.nil? %>
-            <%= render 'layouts/plato' %>
-          <% end %>
-        </td>
-        <td class="sidebar">
-          <%= yield %>
-        </td>
+        <%= yield %>
       </tr>
     </table>
   </div>

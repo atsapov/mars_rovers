@@ -1,26 +1,15 @@
-<table>
-<tr>
-  <td class="sidebar_top">
-    <% if current_rover.nil? %>
-      <%= render 'sidebar_for_no_started' %>
-    <% else %>
-      <%= render 'sidebar_for_started' %>
-    <% end %>
-  </td>
-</tr>
-<tr>
-  <td class="sidebar_bottom">
-    <% if current_rover.nil? %>
-      <%= render 'start_button' %>
-    <% else %>
-      <% if current_rover.step < current_rover.instruction.length %>
-        <%= render 'go_button' %>
-      <% else %>
-        <%= render 'finish_button' %>
-      <% end %>
-    <% end %>
-  </td>
-</tr>
-</table>
-
+<td class="sidebar">
+  <table>
+    <tr>
+      <td class="sidebar_top">
+        <%= render 'sidebar_for_no_started' %>
+      </td>
+    </tr>
+    <tr>
+      <td class="sidebar_bottom">
+        <%= render 'start_button' %>
+      </td>
+    </tr>
+  </table>
+</td>
 

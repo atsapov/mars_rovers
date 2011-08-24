@@ -7,7 +7,7 @@ class Rover < ActiveRecord::Base
                           :format   => { :with => instruction_regex },
                           :length   => { :maximum => 20 }
 
-  def self.authenticate_with_salt(id)
+  def self.authenticate_with_cookie(id)
     rover = find_by_id(id)
     rover ? rover : nil
   end

@@ -1,20 +1,20 @@
 class RoversController < ApplicationController
-#  before_filter :new_rover,   :only => [:index, :create]
-#  before_filter :started_rover, :only => [:update, :destroy]
-#  before_filter :finished_rover, :only => :destroy
+  before_filter :no_started_rover, :only => [:update, :destroy]
+  before_filter :started_rover, :only => [:index, :create]
+  before_filter :no_finished_rover, :only => :destroy
+  before_filter :finished_rover, :only => :update
 
   def index
     $height = 5
     $width = 7
-    @rover = Rover.new
   end
 
   def create
     @rover = Rover.new
     create_rover
     if @rover.save
-      sign_in @rover
-      render 'index'
+      start @rover
+      render 'go'
     else
       flash[:error] = "Instruction should not be blank and must contain 
                        only M, R and L commands!"
@@ -23,29 +23,42 @@ class RoversController < ApplicationController
   end
 
   def update
-    if current_rover.nil?
-      redirect_to root_path
-    else
-      instruction = current_rover.instruction.split('')
-      case instruction[current_rover.step]
-      when "L"
-        self.left
-      when "R"
-        self.right
-      when "M"
-        self.move
-      end
-      current_rover.step += 1
-      current_rover.save
-      render 'index'
+    instruction = current_rover.instruction.split('')
+    case instruction[current_rover.step]
+    when "L"
+      self.left
+    when "R"
+      self.right
+    when "M"
+      self.move
     end
+    current_rover.step += 1
+    current_rover.save
+    render 'go'
   end
 
   def destroy
-    unless current_rover.nil?
-      current_rover.destroy
-      sign_out
-    end
+    current_rover.destroy
+    finish
     redirect_to root_path
   end
+
+  private
+
+    def started_rover
+      render 'go' if started?
+    end
+
+    def no_started_rover
+      redirect_to root_path unless started?
+    end
+
+    def no_finished_rover
+      render 'go' unless finished?
+    end
+
+    def finished_rover
+      redirect_to finish_path if finished?
+    end
 end
+

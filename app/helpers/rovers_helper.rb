@@ -1,7 +1,8 @@
 module RoversHelper
-  
+ 
   def create_rover
-    @rover.instruction = params[:rover][:instruction].upcase
+    @rover.instruction = params[:rover] ? 
+                         params[:rover][:instruction].upcase : ''
     @rover.h_plato = $height
     @rover.w_plato = $width
     @rover.plato = '0'*$height*$width

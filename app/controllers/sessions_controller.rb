@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
 
   def create
-    sign_in @rover
+    start @rover
   end
 
   def destroy
-    sign_out
+    finish
   end
 end
 
