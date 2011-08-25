@@ -13,12 +13,16 @@ module SessionsHelper
     @current_rover ||= rover_from_remember_token
   end
 
-  def started?
+  def created?
     !current_rover.nil?
   end
 
+  def started?
+    current_rover.step > 0 && current_rover.instruction != ''
+  end
+
   def finished?
-    current_rover.step >= current_rover.instruction.length
+    current_rover.step >= current_rover.instruction.length && started?
   end
 
   def current_plato

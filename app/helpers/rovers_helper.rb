@@ -1,8 +1,7 @@
 module RoversHelper
  
   def create_rover
-    @rover.instruction = params[:rover] ? 
-                         params[:rover][:instruction].upcase : ''
+    @rover.instruction = '' 
     @rover.h_plato = $height
     @rover.w_plato = $width
     @rover.plato = '0'*$height*$width
@@ -11,6 +10,7 @@ module RoversHelper
     @rover.direction = ['N','W','S','E'].shuffle[0]
     @rover.step = 0
     @rover.plato[@rover.y_position*$width+@rover.x_position] = '1'
+    @rover.save
   end
 
   def left

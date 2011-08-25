@@ -1,11 +1,4 @@
-<% flash.each do |key, value| %>
-  <%= content_tag(:div, value, :class => "flash #{key}") %>
-<% end %>
 <%= form_for(:rover, :url => start_path) do |f| %>
-  <div class="field">
-    <label> Enter instruction </label><br>
-    <%= f.text_field :instruction %>
-  </div>
   <div class="actions">
     <%= f.submit "Start" %>
   </div>

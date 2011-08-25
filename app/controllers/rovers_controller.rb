@@ -1,8 +1,10 @@
 class RoversController < ApplicationController
-  before_filter :no_started_rover, :only => [:update, :destroy]
-  before_filter :started_rover, :only => [:index, :create]
+  before_filter :no_created_rover, :except => [:index, :create]
+  before_filter :created_rover, :only => [:index, :create]
   before_filter :no_finished_rover, :only => :destroy
   before_filter :finished_rover, :only => :update
+  before_filter :no_started_rover, :only => [:update, :destroy]
+  before_filter :started_rover, :only => :update_instruction
 
   def index
     $height = 5
@@ -12,13 +14,22 @@ class RoversController < ApplicationController
   def create
     @rover = Rover.new
     create_rover
-    if @rover.save
-      start @rover
-      render 'go'
+    start @rover
+    render 'go'
+  end
+
+  def update_instruction
+    if params[:rover] && params[:rover][:instruction] != ''
+      current_rover.instruction = params[:rover][:instruction].upcase
+    else
+      current_rover.instruction = 'error'
+    end
+    if current_rover.save
+      redirect_to go_path
     else
       flash[:error] = "Instruction should not be blank and must contain 
                        only M, R and L commands!"
-      redirect_to root_path
+      render 'go'
     end
   end
 
@@ -45,12 +56,12 @@ class RoversController < ApplicationController
 
   private
 
-    def started_rover
-      render 'go' if started?
+    def created_rover
+      render 'go' if created?
     end
 
-    def no_started_rover
-      redirect_to root_path unless started?
+    def no_created_rover
+      redirect_to root_path unless created?
     end
 
     def no_finished_rover
@@ -59,6 +70,14 @@ class RoversController < ApplicationController
 
     def finished_rover
       redirect_to finish_path if finished?
+    end
+
+    def no_started_rover
+      render 'go' if current_rover.instruction == ''
+    end
+
+    def started_rover
+      render 'go' if started?
     end
 end
 

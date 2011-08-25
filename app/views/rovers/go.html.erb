@@ -10,10 +10,14 @@
     </tr>
     <tr>
       <td class="sidebar_bottom">
-        <% if current_rover.step < current_rover.instruction.length %>
-          <%= render 'go_button' %>
+        <% if current_rover.step == 0 %>
+          <%= render 'save_instruction_button' %>
         <% else %>
-          <%= render 'finish_button' %>
+          <% if finished? %>
+            <%= render 'finish_button' %>
+          <% else %>
+            <%= render 'go_button' %>
+          <% end %>
         <% end %>
       </td>
     </tr>

@@ -3,8 +3,7 @@ class Rover < ActiveRecord::Base
 
   instruction_regex = /^(M*R*L*)*$/
 
-  validates :instruction, :presence => true,
-                          :format   => { :with => instruction_regex },
+  validates :instruction, :format   => { :with => instruction_regex },
                           :length   => { :maximum => 20 }
 
   def self.authenticate_with_cookie(id)
