@@ -1,13 +1,11 @@
 class CreateRovers < ActiveRecord::Migration
   def self.up
     create_table :rovers do |t|
-      t.integer :h_plato
-      t.integer :w_plato
+      t.integer :plato_id
       t.integer :x_position
       t.integer :y_position
       t.string :direction
       t.string :instruction
-      t.string :plato
       t.integer :step
 
       t.timestamps

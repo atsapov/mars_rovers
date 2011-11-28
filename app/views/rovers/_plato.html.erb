@@ -1,10 +1,12 @@
+<div class="main">
 <table>
-  <% for i in  current_plato.reverse %>
+  <% (@plato.height-1).downto(0) do |i| %>
     <tr>    
-      <% for j in  i %>
-        <td><%= coordinate_image(j) %></td>
+      <% 0.upto(@plato.width-1) do |j| %>
+        <td><%= image_tag(position_image(j, i), :class => "plato") %></td>
       <% end %>
     </tr>
   <% end %>
 </table>
+</div>
 

@@ -10,16 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110815191303) do
+ActiveRecord::Schema.define(:version => 20111123083415) do
+
+  create_table "platos", :force => true do |t|
+    t.integer  "height"
+    t.integer  "width"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rovers", :force => true do |t|
-    t.integer  "h_plato"
-    t.integer  "w_plato"
+    t.integer  "plato_id"
     t.integer  "x_position"
     t.integer  "y_position"
     t.string   "direction"
     t.string   "instruction"
-    t.string   "plato"
     t.integer  "step"
     t.datetime "created_at"
     t.datetime "updated_at"

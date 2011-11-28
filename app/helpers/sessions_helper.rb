@@ -18,24 +18,16 @@ module SessionsHelper
   end
 
   def started?
-    current_rover.step > 0 && current_rover.instruction != ''
-  end
-
-  def finished?
-    current_rover.step >= current_rover.instruction.length && started?
-  end
-
-  def current_plato
-    @current_plato ||= plato_from_db
-  end
-
-  def save_plato
-    current_rover.plato = current_plato.join
+    current_rover.step > 0
   end
 
   def finish
     cookies.delete(:remember_token)
     self.current_rover = nil
+  end
+
+  def current_rover?(rover)
+    rover == current_rover
   end
 
   private
@@ -46,22 +38,6 @@ module SessionsHelper
 
     def remember_token
       cookies.signed[:remember_token] || nil
-    end
-  
-    def plato_from_db
-      plato = []
-      0.upto(current_rover.h_plato-1) do |j|
-        a = []
-        0.upto(current_rover.w_plato-1) do |i|
-          a << plato_from_str_to_a[j*current_rover.w_plato+i]
-        end
-        plato << a
-      end
-      plato
-    end
-
-    def plato_from_str_to_a
-      current_rover.plato.split('').map{|k| k.to_i}
     end
 end
 

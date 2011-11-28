@@ -1,13 +1,11 @@
 MarsRovers::Application.routes.draw do
 
-  resources :rovers, :only => [:create, :update, :destroy]
+  resources :platos, :only => [:new, :create, :destroy]
+  resources :rovers, :only => [:edit, :update]
   resources :sessions, :only => [:create, :destroy]
 
-  root :to => 'rovers#index'
-  match '/start',       :to => 'rovers#create'
-  match '/instruction', :to => 'rovers#update_instruction'
-  match '/go',          :to => 'rovers#update'
-  match '/finish',      :to => 'rovers#destroy'
+  root :to => 'platos#new'
+  match 'rovers/:id/go' => 'rovers#go', :as => :go
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

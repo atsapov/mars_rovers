@@ -1,11 +1,20 @@
 <p class="sidebar_title">Information about rover</p>	
-instruction: <%= current_rover.instruction %><br>
-done: <% if current_rover.step != 0 %>
-        <%= current_rover.instruction.split('').[]0..current_rover.step-1 %>
-      <% else %> -
-      <% end %><br>
-step: <%= current_rover.step %><br>
-position:  (<%= current_rover.x_position %>,<%= current_rover.y_position %>)<br>
-direction: <%= current_rover.direction %><br>
-last action: <%= @last_action %>
+<p class="information">
+  instruction: <%= current_rover.reload.instruction %>
+</p>
+<p class="information">
+  done: <% if started? %>
+          <%= current_rover.instruction.split('').[]0..current_rover.step-1 %>
+        <% else %> -
+        <% end %>
+</p>
+<p class="information">
+  step: <%= current_rover.step %>
+</p>
+<p class="information">
+  position:  (<%= current_rover.x_position %>,<%= current_rover.y_position %>)
+</p>
+<p class="information">
+  direction: <%= current_rover.direction %>
+</p>
 

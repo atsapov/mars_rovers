@@ -1,4 +1,4 @@
-<%= form_for(:rover, :url => finish_path) do |f| %>
+<%= form_for(@plato, :html => { :method => :delete }) do |f| %>
   <div class="actions">
     <%= f.submit "Finish" %>
   </div>

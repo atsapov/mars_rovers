@@ -1,26 +1,14 @@
-<td class="main">
-  <%= render 'plato' %>
-</td>
-<td class="sidebar">
-  <table>
-    <tr>
-      <td class="sidebar_top">
-        <%= render 'sidebar_for_started' %>
-      </td>
-    </tr>
-    <tr>
-      <td class="sidebar_bottom">
-        <% if current_rover.step == 0 %>
-          <%= render 'save_instruction_button' %>
-        <% else %>
-          <% if finished? %>
-            <%= render 'finish_button' %>
-          <% else %>
-            <%= render 'go_button' %>
-          <% end %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
-</td>
+<%= render 'plato' %>
+<div class="sidebar">
+  <div class="sidebar_top">
+    <%= render 'sidebar_for_started' %>
+  </div>
+  <div class="sidebar_bottom">
+    <% if @rover.step < @rover.instruction.length %>
+      <%= render 'go_button' %>
+    <% else %>
+      <%= render 'finish_button' %>
+    <% end %>
+  </div>
+</div>
 
