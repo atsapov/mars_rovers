@@ -1,0 +1,16 @@
+%p.sidebar_title Information about rover
+%p.information
+  = "instruction: #{current_rover.reload.instruction}"
+%p.information
+  done:
+  - if started?
+    = current_rover.instruction.split('').[]0..current_rover.step-1
+  - else
+    -
+%p.information
+  = "step: #{current_rover.step}"
+%p.information
+  = "position: (#{current_rover.x_position}, #{current_rover.y_position})"
+%p.information
+  = "direction: #{current_rover.direction}"
+

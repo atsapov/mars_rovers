@@ -1,0 +1,13 @@
+= render 'plato'
+.sidebar
+  .sidebar_top= render 'sidebar_for_started'
+  .sidebar_bottom
+    = form_for(@rover) do |f|
+      = render 'shared/error_messages', :object => f.object
+      .field
+        %label Enter instruction
+        %br
+        = f.text_field :instruction
+      .actions
+        = f.submit "Go!"
+

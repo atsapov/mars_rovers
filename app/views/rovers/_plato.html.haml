@@ -1,0 +1,7 @@
+.main
+  %table
+    - (@plato.height-1).downto(0) do |i|
+      %tr    
+        - 0.upto(@plato.width-1) do |j|
+          %td= image_tag(position_image(j, i), :class => "plato")
+

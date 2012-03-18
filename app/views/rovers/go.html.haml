@@ -1,0 +1,9 @@
+= render 'plato'
+.sidebar
+  .sidebar_top= render 'sidebar_for_started'
+  .sidebar_bottom
+    - if @rover.step < @rover.instruction.length
+      = render 'go_button'
+    - else
+      = render 'finish_button'
+
