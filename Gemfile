@@ -1,16 +1,16 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
-gem 'sqlite3', '1.3.3'
-gem 'haml', '3.1.4'
-gem 'json', '1.5.4'
+gem 'rails', '5.0.0.beta4'
+gem 'sqlite3'
+gem 'haml'
+gem 'json'
 
-group :development do
-  gem 'rspec-rails', '2.6.1'
+group :development, :test do
+  gem 'pry'
 end
 
 group :test do
-  gem 'rspec-rails', '2.6.1'
-  gem 'webrat', '0.7.1'
+  gem 'rspec-rails'
+  gem 'webrat'
 end
 

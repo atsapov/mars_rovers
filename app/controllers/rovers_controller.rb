@@ -6,7 +6,7 @@ class RoversController < ApplicationController
   end
 
   def update
-    if @rover.update_attributes(params[:rover])
+    if @rover.update_attributes(params.require(:rover).permit(:instruction))
       redirect_to go_path
     else
       render 'edit'

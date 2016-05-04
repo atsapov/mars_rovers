@@ -1,15 +1,15 @@
 class Rover < ActiveRecord::Base
-  attr_accessible :instruction
-
   belongs_to :plato
 
-  instruction_regex = /^[MRL]+$/
+  instruction_regex = /\A[MRL]+\z/
 
   validates :instruction, :format  => { :with => instruction_regex },
                           :length  => { :maximum => 20 },
 			  :on      => :update
 
-  def before_create
+  before_create :init
+
+  def init
     self.x_position = rand(7)
     self.y_position = rand(5)
     self.direction = ['N','W','S','E'].shuffle[0]
@@ -48,7 +48,7 @@ class Rover < ActiveRecord::Base
     end
 
     def move
-      if @plato.exist?(*next_position)
+      if plato.exist?(*next_position)
         self.x_position, self.y_position = *next_position
       end
     end

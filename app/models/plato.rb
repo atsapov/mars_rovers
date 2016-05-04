@@ -1,7 +1,9 @@
 class Plato < ActiveRecord::Base
   has_one :rover, :dependent => :destroy
 
-  def before_create
+  before_create :init
+
+  def init
     self.height = 5
     self.width = 7
   end
