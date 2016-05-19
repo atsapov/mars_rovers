@@ -13,6 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20111123083415) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "hstore"
+
   create_table "platos", force: :cascade do |t|
     t.integer  "height"
     t.integer  "width"
